@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apple.api", "apple.api\apple.api.csproj", "{92661F85-80B2-415F-BB93-4D4E57C87B28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apple.client", "apple.client\apple.client.csproj", "{DB89B316-7527-427A-AD3D-F35C6EA549B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apple.shared", "apple.shared\apple.shared.csproj", "{4DA84222-C66E-4CC0-A92E-0598D6EC62EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92661F85-80B2-415F-BB93-4D4E57C87B28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92661F85-80B2-415F-BB93-4D4E57C87B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92661F85-80B2-415F-BB93-4D4E57C87B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92661F85-80B2-415F-BB93-4D4E57C87B28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB89B316-7527-427A-AD3D-F35C6EA549B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB89B316-7527-427A-AD3D-F35C6EA549B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB89B316-7527-427A-AD3D-F35C6EA549B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB89B316-7527-427A-AD3D-F35C6EA549B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DA84222-C66E-4CC0-A92E-0598D6EC62EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DA84222-C66E-4CC0-A92E-0598D6EC62EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DA84222-C66E-4CC0-A92E-0598D6EC62EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DA84222-C66E-4CC0-A92E-0598D6EC62EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
