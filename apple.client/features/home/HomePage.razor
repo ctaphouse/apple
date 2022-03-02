@@ -3,22 +3,25 @@
 
 
 <PageTitle>Blazing Trails</PageTitle>
+
 @if (_trails == null)
 {
     <p>Loading trails...</p>
 }
 else
 {
+    <TrailDetails Trail="_selectedTrail" />
     <div class="grid">
         @foreach (var trail in _trails)
         {
-            <TrailCard Trail="trail" />
+            <TrailCard Trail="trail" OnSelected="HandleSelectedTrail" />
         }
     </div>
 }
 
 @code {
     private IEnumerable<Trail>? _trails;
+    private Trail? _selectedTrail;
 
     protected override async Task OnInitializedAsync()
     {
@@ -32,4 +35,6 @@ else
             Console.WriteLine($"There was a problem loading trail data: {err.Message}");
         }
     }
+
+    private void HandleSelectedTrail(Trail trail) => _selectedTrail = trail;
 }
