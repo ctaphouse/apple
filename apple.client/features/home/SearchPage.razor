@@ -34,7 +34,8 @@ else
     private IEnumerable<Trail> _cachedSearchResults = Array.Empty<Trail>();
     private Trail? _selectedTrail;
     [Parameter] public string SearchTerm { get; set; } = default!;
-    [Parameter] public int? MaxLength { get; set; }
+    [Parameter, SupplyParameterFromQuery] public int? MaxLength { get; set; }
+    [Parameter, SupplyParameterFromQuery] public int? MaxTime { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -52,17 +53,28 @@ else
         }
     }
 
-    protected override void OnParametersSet()
+    protected override void OnParametersSet() => UpdateFilters();
+
+    private void HandleSelectedTrail(Trail trail) => _selectedTrail = trail;
+
+    private void UpdateFilters()
     {
-        if(_cachedSearchResults.Any() && MaxLength.HasValue)
+        var filters = new List<Func<Trail, bool>>();
+        if(MaxLength is not null && MaxLength > 0)
         {
-            _searchResults = _cachedSearchResults.Where(x => x.Length <= MaxLength.Value);
+            filters.Add(x => x.Length <= MaxLength);
         }
-        else if(_cachedSearchResults.Any() && MaxLength is null)
+        if(MaxTime is not null && MaxTime > 0)
+        {
+            filters.Add(x => x.TimeInMinutes <= MaxTime * 60);
+        }
+        if(filters.Any())
+        {
+            _searchResults = _cachedSearchResults.Where(trail => filters.All(filter => filter(trail)));
+        }
+        else
         {
             _searchResults = _cachedSearchResults;
         }
     }
-
-    private void HandleSelectedTrail(Trail trail) => _selectedTrail = trail;
 }
