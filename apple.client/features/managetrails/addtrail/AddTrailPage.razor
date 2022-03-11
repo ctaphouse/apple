@@ -1,0 +1,54 @@
+@page "/add-trail"
+
+<PageTitle>Add trail - Blazing Trails</PageTitle>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Add Trail</li>
+    </ol>
+</nav>
+
+<h3 class="mt-5 mb-4">Add a trail</h3>
+
+<EditForm Model="_trail" OnValidSubmit="SubmitForm">
+    <FormSection Title="Basic Details" HelpText="This information is used to identify the trail and can be searched to help hikers find it.">
+        <FormFieldSet Width="col-6">
+            <label for="trailName" class="font-weight-bold text-secondary">Name</label>
+            <InputText id="trailName" class="form-control" @bind-Value="_trail.Name" />
+        </FormFieldSet>
+        <FormFieldSet>
+            <label for="trailDescription" class="font-weight-bold text-secondary">Description</label>
+            <InputTextArea id="trailDescription" class="form-control" @bind-Value="_trail.Description" />
+        </FormFieldSet>
+        <FormFieldSet Width="col-6">
+            <label for="trailLocation" class="font-weight-bold text-secondary">Location</label>
+            <InputText id="trailLocation" class="form-control" @bind-Value="_trail.Location" />
+        </FormFieldSet>
+    </FormSection>
+    <FormSection Title="Difficulty" HelpText="Help other hikers out by telling them the length of the trail is how long it might take them.">
+        <FormFieldSet Width="col-3">
+            <label for="trailLength" class="font-weight-bold text-secondary">Length (km)</label>
+            <InputText id="trailLength" class="form-control" @bind-Value="_trail.Location" />
+        </FormFieldSet>
+    </FormSection>
+    <div class="mt-4 mb-5">
+        <div class="row">
+            <div class="offset-4 col-8 text-right">
+                <button type="button" class="btn btn-outline-secondary" @onclick="@(() => _trail = new TrailDto())">Reset</button>
+                <button type="submit" class="btn btn-outline-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private TrailDto _trail = new TrailDto();
+
+    private async Task SubmitForm()
+    {
+
+    }
+}

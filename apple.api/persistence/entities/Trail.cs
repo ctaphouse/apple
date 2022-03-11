@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace apple.api.persistence.entities;
+
 public class Trail
 {
     public int Id { get; set; }
