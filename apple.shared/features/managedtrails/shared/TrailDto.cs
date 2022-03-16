@@ -1,6 +1,5 @@
 using FluentValidation;
 namespace apple.shared.features.managetrails.shared;
-
 public class TrailDto
 {
     public int Id { get; set; }
