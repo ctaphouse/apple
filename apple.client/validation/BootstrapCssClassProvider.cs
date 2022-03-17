@@ -4,7 +4,7 @@ public class BootstrapCssClassProvider : FieldCssClassProvider
 {
     public override string GetFieldCssClass(EditContext editContext, in FieldIdentifier fieldIdentifier)
     {
-        var isValid = editContext.GetValidationMessages(fieldIdentifier).Any();
+        var isValid = !editContext.GetValidationMessages(fieldIdentifier).Any();
         
         if(editContext.IsModified(fieldIdentifier))
         {
