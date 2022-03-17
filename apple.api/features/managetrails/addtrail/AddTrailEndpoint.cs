@@ -31,7 +31,8 @@ public class AddTrailEndpoint : EndpointBaseAsync.WithRequest<AddTrailRequest>.W
         var routeInstructions = request.Trail.Route.Select(x => new RouteInstruction
         {
             Stage = x.Stage,
-            Description = x.Description
+            Description = x.Description,
+            Trail = trail
         });
 
         await _context.AddRangeAsync(routeInstructions, cancellationToken);
