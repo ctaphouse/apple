@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 public class BlazingTrailsContext: DbContext
 {
     public DbSet<Trail> Trails => Set<Trail>();
-    public DbSet<RouteInstruction> Route => Set<RouteInstruction>();
+    public DbSet<RouteInstruction> Routes => Set<RouteInstruction>();
     public BlazingTrailsContext(DbContextOptions<BlazingTrailsContext> options) : base(options) {}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
