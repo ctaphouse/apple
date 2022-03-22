@@ -56,6 +56,11 @@ else if (_errorMessage is not null)
             <InputText id="trailLocation" class="form-control" @bind-Value="_trail.Location" />
             <ValidationMessage For="@(() => _trail.Location)" />
         </FormFieldSet>
+        <FormFieldSet>
+            <label for="trailImage" class="font-weight-bold text-secondary">Image</label>
+            <InputFile id="trailImage" class="form-control-file" accept=".png,.jpg,.jpeg"
+                OnChange="LoadTrailImage" />
+        </FormFieldSet>
     </FormSection>
     <FormSection Title="Difficulty"
         HelpText="Help other hikers out by telling them the length of the trail is how long it might take them.">
@@ -131,6 +136,8 @@ else if (_errorMessage is not null)
     private bool _submitSuccessful;
     private string? _errorMessage;
 
+    private IBrowserFile? _trailImage;
+
     protected override void OnInitialized()
     {
         _editContext = new EditContext(_trail);
@@ -148,7 +155,14 @@ else if (_errorMessage is not null)
             return;
         }
 
-        ResetFormWithSuccess();
+        if(_trailImage is null)
+        {
+            ResetFormWithSuccess();
+            return;
+        }
+
+        await ProcessImage(response.TrailId, _trailImage);
+        return;
     }
 
     private void ResetForm()
@@ -166,5 +180,24 @@ else if (_errorMessage is not null)
         _trail = new TrailDto();
         _editContext = new EditContext(_trail);
         _editContext.SetFieldCssClassProvider(new BootstrapCssClassProvider());
+    }
+
+    private void LoadTrailImage(InputFileChangeEventArgs e) => _trailImage = e.File;
+
+    private async Task ProcessImage(int trailId, IBrowserFile? trailImage)
+    {
+        var imageUploadResponse = await Mediator.Send(new UploadTrailImageRequest(trailId, trailImage));
+
+        if(!imageUploadResponse.IsSuccess)
+        {
+            _errorMessage = "Your trail was saved, but there was a problem uploading the image.";
+            _submitSuccessful = false;            
+        }
+        else
+        {
+            _errorMessage = null;
+            _submitSuccessful = true;
+            ResetFormWithSuccess();
+        }
     }
 }
