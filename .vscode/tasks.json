@@ -35,7 +35,8 @@
                 "--project",
                 "${workspaceFolder}/apple.api/apple.api.csproj"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "options": { "cwd": "${workspaceFolder}/apple.api/"}
         }
     ]
 }

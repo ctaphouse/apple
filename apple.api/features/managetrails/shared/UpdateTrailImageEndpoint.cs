@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
+using apple.shared.features.managetrails.shared;
 
 namespace apple.api.features.managetrails.shared;
 public class UpdateTrailImageEndpoint : EndpointBaseAsync.WithRequest<int>.WithActionResult<bool>
@@ -14,6 +15,7 @@ public class UpdateTrailImageEndpoint : EndpointBaseAsync.WithRequest<int>.WithA
         _context = context;
     }
 
+    [HttpPost(UploadTrailImageRequest.RouteTemplate)]
     public override async Task<ActionResult<bool>> HandleAsync([FromRoute] int trailId, CancellationToken cancellationToken = default)
     {
         var trail = await _context.Trails.SingleOrDefaultAsync(x => x.Id == trailId, cancellationToken);
@@ -45,6 +47,10 @@ public class UpdateTrailImageEndpoint : EndpointBaseAsync.WithRequest<int>.WithA
         image.Mutate(x => x.Resize(resizeOptions));
         
         await image.SaveAsJpegAsync(saveLocation, cancellationToken: cancellationToken);
+
+        trail.Image = fileName;
+
+        await _context.SaveChangesAsync(cancellationToken);
 
         return Ok(true);
     }
