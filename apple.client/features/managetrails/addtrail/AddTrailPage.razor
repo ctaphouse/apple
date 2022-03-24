@@ -136,7 +136,7 @@ else if (_errorMessage is not null)
     private bool _submitSuccessful;
     private string? _errorMessage;
 
-    private IBrowserFile? _trailImage;
+    private IBrowserFile _trailImage = default!;
 
     protected override void OnInitialized()
     {
@@ -186,7 +186,7 @@ else if (_errorMessage is not null)
 
     private async Task ProcessImage(int trailId, IBrowserFile? trailImage)
     {
-        var imageUploadResponse = await Mediator.Send(new UploadTrailImageRequest(trailId, trailImage));
+        var imageUploadResponse = await Mediator.Send(new UploadTrailImageRequest(trailId, _trailImage));
 
         if(!imageUploadResponse.IsSuccess)
         {
