@@ -1,3 +1,4 @@
+using apple.shared.features.managetrails.shared;
 using FluentValidation;
 namespace apple.shared.features.managetrails.shared;
 public class TrailDto
@@ -10,21 +11,18 @@ public class TrailDto
     public int Length { get; set; }
     public string? Image { get; set; }
     public ImageAction ImageAction { get; set; }
+    public List<RouteInstruction> Route { get; set; } = new List<RouteInstruction>();
+    public class RouteInstruction
+    {
+        public int Stage { get; set; }
+        public string Description { get; set; } = default!;
+    }
 }
 public enum ImageAction
 {
     None,
     Add,
     Remove
-}
-
-public List<RouteInstruction> Route { get; set; } = new List<RouteInstruction>();
-
-public class RouteInstruction
-{
-    public int Stage { get; set; }
-    public string Description { get; set; } = default!;
-}
 }
 
 public class TrailValidator : AbstractValidator<TrailDto>

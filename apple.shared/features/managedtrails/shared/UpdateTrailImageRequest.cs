@@ -6,5 +6,5 @@ public record UploadTrailImageRequest(int TrailId, IBrowserFile File) : IRequest
 {
     public const string RouteTemplate = "api/trails/{trailId}/images";
 
-    public record Response(bool IsSuccess);
+    public record Response(string ImageName);
 }

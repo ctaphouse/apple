@@ -21,12 +21,12 @@ public class UploadTrailImageHandler : IRequestHandler<UploadTrailImageRequest, 
         var response = await _httpClient.PostAsync(UploadTrailImageRequest.RouteTemplate.Replace("{trailId}", request.TrailId.ToString()), content, cancellationToken);
         if(response.IsSuccessStatusCode)
         {
-            var uploadSuccessful = await response.Content.ReadFromJsonAsync<bool>(cancellationToken: cancellationToken);
-            return new UploadTrailImageRequest.Response(uploadSuccessful);
+            var fileName = await response.Content.ReadAsStringAsync(cancellationToken: cancellationToken);
+            return new UploadTrailImageRequest.Response(fileName);
         }
         else
         {
-            return new UploadTrailImageRequest.Response(false);
+            return new UploadTrailImageRequest.Response("");
         }
     }
 }
