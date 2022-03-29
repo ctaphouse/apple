@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace apple.api.features.managetrails.edittrail;
 
 public class GetTrailEndpoint : EndpointBaseAsync.WithRequest<int>.WithActionResult<GetTrailRequest.Response>
-{
+{  
     private BlazingTrailsContext _context;
 
     public GetTrailEndpoint(BlazingTrailsContext context)
